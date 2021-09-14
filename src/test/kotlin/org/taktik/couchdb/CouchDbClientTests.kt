@@ -16,7 +16,7 @@
  */
 
 package org.taktik.couchdb
-
+/*
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -325,4 +325,4 @@ class CouchDbClientTests {
         val fetched = client.get<Code>(codes.map { it.id }).toList()
         assertEquals(codes.map { it.code }, fetched.map { it.code })
     }
-}
+}*/
