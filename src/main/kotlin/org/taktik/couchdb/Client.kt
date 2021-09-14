@@ -251,6 +251,7 @@ interface Client {
     suspend fun create(q: Int?, n: Int?): Boolean
     suspend fun security(security: Security): Boolean
     suspend fun designDocumentsIds(): Set<String>
+    suspend fun schedulerJobs(): SchedulerJobs
 }
 
 private const val NOT_FOUND_ERROR = "not_found"
@@ -755,6 +756,15 @@ class ClientImpl(
             dbURI.toString().removeSuffix(dbURI.path)
         ))
             .append("_active_tasks")
+        val request = newRequest(uri)
+        return getCouchDbResponseWithTypeReified(request)!!
+    }
+
+    override suspend fun schedulerJobs(): SchedulerJobs {
+        val uri = (dbURI.takeIf { it.path.isEmpty() || it.path == "/" } ?: java.net.URI.create(
+                dbURI.toString().removeSuffix(dbURI.path)
+        ))
+                .append("_scheduler/jobs")
         val request = newRequest(uri)
         return getCouchDbResponseWithTypeReified(request)!!
     }
